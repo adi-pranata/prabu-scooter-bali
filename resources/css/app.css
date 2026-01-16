@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+@theme {
+    /* Primary Orange - #FF9500 */
+    --color-primary: #FF9500;
+    --color-primary-50: #FFF8EB;
+    --color-primary-100: #FFECC6;
+    --color-primary-200: #FFD88A;
+    --color-primary-300: #FFC14D;
+    --color-primary-400: #FFAB24;
+    --color-primary-500: #FF9500;
+    --color-primary-600: #E67A00;
+    --color-primary-700: #CC6600;
+    --color-primary-800: #A35200;
+    --color-primary-900: #7A3D00;
+
+    /* Dark theme colors */
+    --color-dark: #1A1A2E;
+    --color-dark-light: #16213E;
+    --color-dark-lighter: #0F3460;
+
+    --animate-marquee: marquee 16s linear infinite;
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+
+}
