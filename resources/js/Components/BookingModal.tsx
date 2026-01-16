@@ -6,7 +6,6 @@ import {
     GasStation,
     SecuritySafe,
     Setting2,
-    Sms,
     User,
     Whatsapp,
 } from 'iconsax-react';
@@ -27,7 +26,6 @@ export default function BookingModal({
 }: BookingModalProps) {
     const [formData, setFormData] = useState({
         fullName: '',
-        email: '',
         phone: '',
         startDate: '',
         endDate: '',
@@ -244,14 +242,6 @@ export default function BookingModal({
                                     icon={<User size={20} color="#9CA3AF" />}
                                     name="fullName"
                                     placeholder="Full Name"
-                                    required
-                                    onChange={handleInputChange}
-                                />
-                                <Input
-                                    icon={<Sms size={20} color="#9CA3AF" />}
-                                    name="email"
-                                    type="email"
-                                    placeholder="Email"
                                     required
                                     onChange={handleInputChange}
                                 />

@@ -23,7 +23,6 @@ import {
     Profile,
     SecuritySafe,
     Setting2,
-    Sms,
     Star1,
     TruckTime,
     User,
@@ -40,12 +39,20 @@ interface Props {
     site_settings: SiteSettings;
 }
 
-export default function Welcome({ scooters, testimonials, site_settings }: Props) {
-    const [selectedScooter, setSelectedScooter] = useState<Scooter | null>(null);
+export default function Welcome({
+    scooters,
+    testimonials,
+    site_settings,
+}: Props) {
+    const [selectedScooter, setSelectedScooter] = useState<Scooter | null>(
+        null,
+    );
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showAll, setShowAll] = useState(false);
     const DEFAULT_VISIBLE = 4;
-    const visibleScooters = showAll ? scooters : scooters.slice(0, DEFAULT_VISIBLE);
+    const visibleScooters = showAll
+        ? scooters
+        : scooters.slice(0, DEFAULT_VISIBLE);
     const shouldShowToggle = scooters.length > DEFAULT_VISIBLE;
 
     const openBookingModal = (scooter: Scooter) => {
@@ -68,7 +75,9 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
 
     const getWhatsAppLink = (scooterName?: string) => {
         const number = site_settings?.wa_number || '+6283119584477';
-        const text = scooterName ? `Hello, I would like to rent the ${scooterName}. Is it available?` : 'Hello, I would like to rent a scooter.';
+        const text = scooterName
+            ? `Hello, I would like to rent the ${scooterName}. Is it available?`
+            : 'Hello, I would like to rent a scooter.';
         return `https://wa.me/${number}?text=${encodeURIComponent(text)}`;
     };
 
@@ -83,18 +92,27 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
     return (
         <FrontendLayout settings={site_settings}>
             <Head>
-                <title>{site_settings?.hero_title || 'Prabu - Scooter Rental Bali'}</title>
+                <title>{site_settings?.hero_title || 'Prabu'}</title>
                 <meta
                     name="description"
-                    content={site_settings?.hero_subtitle || 'Find, book and rent scooters easily in Bali. Free delivery around Canggu area.'}
+                    content={
+                        site_settings?.hero_subtitle ||
+                        'Find, book and rent scooters easily in Bali. Free delivery around Canggu area.'
+                    }
                 />
-                <meta name="keywords" content="rental motor bali, scooter rental bali, sewa motor bali, canggu scooter rental, bali bike rental" />
+                <meta
+                    name="keywords"
+                    content="rental motor bali, scooter rental bali, sewa motor bali, canggu scooter rental, bali bike rental"
+                />
             </Head>
 
             {/* Hero Section */}
             <section className="relative min-h-screen overflow-hidden bg-white">
                 {/* World Map Background */}
-                <div className="pointer-events-none absolute top-20 right-0 z-0" style={{ width: '790px', height: '534px' }}>
+                <div
+                    className="pointer-events-none absolute top-20 right-0 z-0"
+                    style={{ width: '790px', height: '534px' }}
+                >
                     <img src="/images/map-line.png" />
                 </div>
 
@@ -109,7 +127,11 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                     Scooters{' '}
                                     <span className="relative inline-block text-primary">
                                         Easily
-                                        <img src="/images/svgs/easily-line.svg" alt="" className="absolute -bottom-1 left-0 w-full sm:-bottom-2" />
+                                        <img
+                                            src="/images/svgs/easily-line.svg"
+                                            alt=""
+                                            className="absolute -bottom-1 left-0 w-full sm:-bottom-2"
+                                        />
                                     </span>
                                 </h1>
                                 <p className="max-w-md text-[15px] leading-relaxed text-gray-600 sm:text-base">
@@ -149,7 +171,9 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                     <AnimatedNumber value={15} />
                                     <span className="text-primary">K+</span>
                                 </div>
-                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">Rented</p>
+                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">
+                                    Rented
+                                </p>
                             </div>
 
                             <div className="text-center">
@@ -157,7 +181,9 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                     <AnimatedNumber value={20} />
                                     <span className="text-primary">K+</span>
                                 </div>
-                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">Customers</p>
+                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">
+                                    Customers
+                                </p>
                             </div>
 
                             <div className="text-center">
@@ -165,7 +191,9 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                     <AnimatedNumber value={150} />
                                     <span className="text-primary">+</span>
                                 </div>
-                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">Brand</p>
+                                <p className="mt-1 text-[14px] leading-none text-gray-400 sm:text-[16px]">
+                                    Brand
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -178,10 +206,14 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                     {/* Header */}
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center rounded-xl bg-primary/10 px-8 py-3">
-                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">HOW IT WORK</span>
+                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">
+                                HOW IT WORK
+                            </span>
                         </div>
 
-                        <h2 className="mt-8 text-[38px] font-medium text-dark">Rent with following 3 working steps</h2>
+                        <h2 className="mt-8 text-[38px] font-medium text-dark">
+                            Rent with following 3 working steps
+                        </h2>
                     </div>
 
                     {/* Steps */}
@@ -189,10 +221,16 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                         {/* Step 1 */}
                         <div className="text-center">
                             <div className="mx-auto flex h-[120px] w-[120px] items-center justify-center rounded-2xl bg-primary/10">
-                                <LocationTick size={48} variant="Bold" color="#FF9500" />
+                                <LocationTick
+                                    size={48}
+                                    variant="Bold"
+                                    color="#FF9500"
+                                />
                             </div>
 
-                            <h3 className="mt-5 text-lg font-medium text-dark">Choose location</h3>
+                            <h3 className="mt-5 text-lg font-medium text-dark">
+                                Choose location
+                            </h3>
 
                             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
                                 Choose your and find <br /> your best car
@@ -202,26 +240,41 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                         {/* Step 2 */}
                         <div className="text-center">
                             <div className="mx-auto flex h-[120px] w-[120px] items-center justify-center rounded-2xl bg-primary/10">
-                                <Calendar size={48} variant="Bold" color="#FF9500" />
+                                <Calendar
+                                    size={48}
+                                    variant="Bold"
+                                    color="#FF9500"
+                                />
                             </div>
 
-                            <h3 className="mt-5 text-lg font-semibold text-dark">Pick-up date</h3>
+                            <h3 className="mt-5 text-lg font-semibold text-dark">
+                                Pick-up date
+                            </h3>
 
                             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
-                                Select your pick up date and <br /> time to book your car
+                                Select your pick up date and <br /> time to book
+                                your car
                             </p>
                         </div>
 
                         {/* Step 3 */}
                         <div className="text-center">
                             <div className="mx-auto flex h-[120px] w-[120px] items-center justify-center rounded-2xl bg-primary/10">
-                                <Icon icon="mdi:scooter" width={48} height={48} color="#FF9500" />
+                                <Icon
+                                    icon="mdi:scooter"
+                                    width={48}
+                                    height={48}
+                                    color="#FF9500"
+                                />
                             </div>
 
-                            <h3 className="mt-5 text-lg font-semibold text-dark">Book your scooter</h3>
+                            <h3 className="mt-5 text-lg font-semibold text-dark">
+                                Book your scooter
+                            </h3>
 
                             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
-                                Book your scooter and we will deliver <br /> it directly to you
+                                Book your scooter and we will deliver <br /> it
+                                directly to you
                             </p>
                         </div>
                     </div>
@@ -237,12 +290,24 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                             <div className="flex w-max animate-marquee items-center gap-14 opacity-70 hover:[animation-play-state:paused]">
                                 {/* set 1 */}
                                 {brands.map((b) => (
-                                    <img key={b.alt} src={b.src} alt={b.alt} className="h-9 w-auto shrink-0 grayscale" draggable={false} />
+                                    <img
+                                        key={b.alt}
+                                        src={b.src}
+                                        alt={b.alt}
+                                        className="h-9 w-auto shrink-0 grayscale"
+                                        draggable={false}
+                                    />
                                 ))}
 
                                 {/* set 2 (duplikat persis) */}
                                 {brands.map((b) => (
-                                    <img key={`${b.alt}-dup`} src={b.src} alt={b.alt} className="h-9 w-auto shrink-0 grayscale" draggable={false} />
+                                    <img
+                                        key={`${b.alt}-dup`}
+                                        src={b.src}
+                                        alt={b.alt}
+                                        className="h-9 w-auto shrink-0 grayscale"
+                                        draggable={false}
+                                    />
                                 ))}
                             </div>
                         </div>
@@ -275,7 +340,9 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                         <div className="lg:pl-10">
                             {/* badge */}
                             <div className="inline-flex items-center rounded-xl bg-primary-50 px-7 py-3">
-                                <span className="text-xs font-semibold tracking-[0.18em] text-primary">WHY CHOOSE US</span>
+                                <span className="text-xs font-semibold tracking-[0.18em] text-primary">
+                                    WHY CHOOSE US
+                                </span>
                             </div>
 
                             {/* title */}
@@ -287,22 +354,46 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                             {/* list */}
                             <div className="mt-10 space-y-7">
                                 <FeatureRow
-                                    icon={<MoneySend size={22} variant="Bold" color="var(--color-primary)" />}
+                                    icon={
+                                        <MoneySend
+                                            size={22}
+                                            variant="Bold"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
                                     title="Best price guaranteed"
                                     description="Find a lower price? We’ll refund you 100% of the difference."
                                 />
                                 <FeatureRow
-                                    icon={<Profile size={22} variant="Bold" color="var(--color-primary)" />}
+                                    icon={
+                                        <Profile
+                                            size={22}
+                                            variant="Bold"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
                                     title="Experience driver"
                                     description="Don’t have driver? Don’t worry, we have many experienced driver for you."
                                 />
                                 <FeatureRow
-                                    icon={<TruckTime size={22} variant="Bold" color="var(--color-primary)" />}
+                                    icon={
+                                        <TruckTime
+                                            size={22}
+                                            variant="Bold"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
                                     title="24 hour delivery"
                                     description="Book anytime and we will deliver it directly to you."
                                 />
                                 <FeatureRow
-                                    icon={<MessageQuestion size={22} variant="Bold" color="var(--color-primary)" />}
+                                    icon={
+                                        <MessageQuestion
+                                            size={22}
+                                            variant="Bold"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
                                     title="24/7 technical support"
                                     description="Have a question? Contact support any time."
                                 />
@@ -318,19 +409,25 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                     {/* Header */}
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center rounded-xl bg-primary/10 px-8 py-3">
-                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">POPULAR RENTAL DEALS</span>
+                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">
+                                POPULAR RENTAL DEALS
+                            </span>
                         </div>
 
-                        <h2 className="mt-6 text-[32px] font-medium text-dark sm:text-[44px]">Most popular scooters rental deals</h2>
+                        <h2 className="mt-6 text-[32px] font-medium text-dark sm:text-[44px]">
+                            Most popular scooters rental deals
+                        </h2>
                     </div>
 
                     {/* Grid */}
                     <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                         {visibleScooters.map((scooter) => {
-                            const ratingRaw = scooter.rating ?? 4.8;
-                            const rating = isNaN(Number(ratingRaw)) ? 4.8 : Number(ratingRaw);
+                            // const ratingRaw = scooter.rating ?? 5.0;
+                            // const rating = isNaN(Number(ratingRaw))
+                            //     ? 5.0
+                            //     : Number(ratingRaw);
 
-                            const reviews = scooter.reviews_count ?? 2436;
+                            // const reviews = scooter.reviews_count ?? 2436;
                             return (
                                 <div
                                     key={scooter.id}
@@ -342,11 +439,15 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                             <img
                                                 src={
                                                     scooter.image_path
-                                                        ? scooter.image_path.startsWith('http')
+                                                        ? scooter.image_path.startsWith(
+                                                              'http',
+                                                          )
                                                             ? scooter.image_path
-                                                            : scooter.image_path.startsWith('storage/')
-                                                                ? `/${scooter.image_path}`
-                                                                : `/storage/${scooter.image_path}`
+                                                            : scooter.image_path.startsWith(
+                                                                    'storage/',
+                                                                )
+                                                              ? `/${scooter.image_path}`
+                                                              : `/storage/${scooter.image_path}`
                                                         : '/images/placeholder-scooter.png'
                                                 }
                                                 alt={scooter.name}
@@ -356,21 +457,47 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                         </div>
 
                                         {/* Name */}
-                                        <h3 className="mt-4 text-[20px] leading-tight font-semibold text-dark sm:text-[22px]">{scooter.name}</h3>
+                                        <h3 className="mt-4 text-[20px] leading-tight font-semibold text-dark sm:text-[22px]">
+                                            {scooter.name}
+                                        </h3>
 
                                         {/* Rating */}
-                                        <div className="mt-2 flex items-center gap-2 text-[14px] sm:text-[15px]">
-                                            <Star1 size={20} variant="Bold" color="#F59E0B" />
-                                            <span className="font-semibold text-dark">{rating}</span>
-                                            <span className="text-gray-400">({Number(reviews).toLocaleString()} reviews)</span>
-                                        </div>
+                                        {/* <div className="mt-2 flex items-center gap-2 text-[14px] sm:text-[15px]">
+                                            <Star1
+                                                size={20}
+                                                variant="Bold"
+                                                color="#F59E0B"
+                                            /> */}
+                                        {/* <span className="font-semibold text-dark">
+                                                {rating}
+                                            </span>
+                                            <span className="text-gray-400">
+                                                (
+                                                {Number(
+                                                    reviews,
+                                                ).toLocaleString()}{' '}
+                                                reviews)
+                                            </span> */}
+                                        {/* </div> */}
 
                                         {/* Specs 2x2 (rapi) */}
                                         <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-5">
-                                            <SpecItem icon={User} text="2 Passengers" />
-                                            <SpecItem icon={Setting2} text="Matic" />
-                                            <SpecItem icon={GasStation} text="Pertamax" />
-                                            <SpecItem icon={SecuritySafe} text="Included" />
+                                            <SpecItem
+                                                icon={User}
+                                                text="2 Passengers"
+                                            />
+                                            <SpecItem
+                                                icon={Setting2}
+                                                text="Matic"
+                                            />
+                                            <SpecItem
+                                                icon={GasStation}
+                                                text="Pertamax"
+                                            />
+                                            <SpecItem
+                                                icon={SecuritySafe}
+                                                text="Included"
+                                            />
                                         </div>
 
                                         {/* Divider */}
@@ -378,21 +505,29 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
 
                                         {/* Price */}
                                         <div className="mt-4 flex items-baseline justify-between">
-                                            <span className="text-[13px] text-gray-400 sm:text-sm">Price</span>
+                                            <span className="text-[13px] text-gray-400 sm:text-sm">
+                                                Price
+                                            </span>
 
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-[18px] font-semibold text-dark sm:text-[20px]">
-                                                    {formatCurrency(scooter.price_per_day)}
+                                                    {formatCurrency(
+                                                        scooter.price_per_day,
+                                                    )}
                                                 </span>
-                                                <span className="text-[13px] text-gray-400 sm:text-sm">/day</span>
+                                                <span className="text-[13px] text-gray-400 sm:text-sm">
+                                                    /day
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
-
                                     {/* Button */}
                                     <div className="px-5 pt-4 pb-5 sm:px-6 sm:pb-6">
                                         <button
-                                            onClick={() => scooter.is_available && openBookingModal(scooter)}
+                                            onClick={() =>
+                                                scooter.is_available &&
+                                                openBookingModal(scooter)
+                                            }
                                             disabled={!scooter.is_available}
                                             className={[
                                                 'flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition',
@@ -402,7 +537,11 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                             ].join(' ')}
                                         >
                                             Rent Now
-                                            <ArrowRight2 size={18} variant="Linear" color="#FFFFFF" />
+                                            <ArrowRight2
+                                                size={18}
+                                                variant="Linear"
+                                                color="#FFFFFF"
+                                            />
                                         </button>
                                     </div>
                                 </div>
@@ -418,7 +557,8 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                 onClick={() => setShowAll((prev) => !prev)}
                                 className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                             >
-                                {showAll ? 'Show less' : 'Show all scooters'} <span aria-hidden>→</span>
+                                {showAll ? 'Show less' : 'Show all scooters'}{' '}
+                                <span aria-hidden>→</span>
                             </button>
                         </div>
                     )}
@@ -431,11 +571,14 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                     {/* Header */}
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center rounded-xl bg-primary/10 px-8 py-3">
-                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">CONTACT US</span>
+                            <span className="text-xs font-semibold tracking-[0.18em] text-primary">
+                                CONTACT US
+                            </span>
                         </div>
 
                         <h2 className="mt-6 text-[34px] font-semibold text-dark sm:text-[46px]">
-                            {site_settings?.contact_title || 'Office Center Map'}
+                            {site_settings?.contact_title ||
+                                'Office Center Map'}
                         </h2>
                     </div>
 
@@ -449,24 +592,45 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                             </p>
 
                             <div className="space-y-8">
-                                <ContactRow icon={<Sms variant="Linear" color="var(--color-primary)" />}>
-                                    <a href={`mailto:${site_settings?.email ?? 'prabuscooterbali@gmail.com'}`} className="hover:text-dark">
-                                        {site_settings?.email ?? 'prabuscooterbali@gmail.com'}
+                                <ContactRow
+                                    icon={
+                                        <Call
+                                            variant="Linear"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
+                                >
+                                    <a
+                                        href={`tel:${site_settings?.phone ?? '+6283119584477'}`}
+                                        className="hover:text-dark"
+                                    >
+                                        {site_settings?.phone ??
+                                            '+62 831 1958 4477'}
                                     </a>
                                 </ContactRow>
 
-                                <ContactRow icon={<Call variant="Linear" color="var(--color-primary)" />}>
-                                    <a href={`tel:${site_settings?.phone ?? '+6283119584477'}`} className="hover:text-dark">
-                                        {site_settings?.phone ?? '+62 831 1958 4477'}
-                                    </a>
+                                <ContactRow
+                                    icon={
+                                        <Clock
+                                            variant="Linear"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
+                                >
+                                    {site_settings?.open_hours ??
+                                        'Everyday : 08.00-21.00'}
                                 </ContactRow>
 
-                                <ContactRow icon={<Clock variant="Linear" color="var(--color-primary)" />}>
-                                    {site_settings?.open_hours ?? 'Everyday : 08.00-21.00'}
-                                </ContactRow>
-
-                                <ContactRow icon={<Location variant="Linear" color="var(--color-primary)" />}>
-                                    {site_settings?.address ?? 'Jl. Pantai Pererenan No.40, Pererenan, Kec. Mengwi, Mangupura, Bali 80351'}
+                                <ContactRow
+                                    icon={
+                                        <Location
+                                            variant="Linear"
+                                            color="var(--color-primary)"
+                                        />
+                                    }
+                                >
+                                    {site_settings?.address ??
+                                        'Jl. Pantai Pererenan No.40, Pererenan, Kec. Mengwi, Mangupura, Bali 80351'}
                                 </ContactRow>
                             </div>
 
@@ -475,15 +639,23 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                                 <div className="flex items-center gap-4">
                                     {site_settings?.social_links?.instagram && (
                                         <SocialIcon
-                                            href={site_settings.social_links.instagram}
+                                            href={
+                                                site_settings.social_links
+                                                    .instagram
+                                            }
                                             label="Instagram"
-                                            icon={<Instagram variant="Linear" />}
+                                            icon={
+                                                <Instagram variant="Linear" />
+                                            }
                                         />
                                     )}
 
                                     {site_settings?.social_links?.facebook && (
                                         <SocialIcon
-                                            href={site_settings.social_links.facebook}
+                                            href={
+                                                site_settings.social_links
+                                                    .facebook
+                                            }
                                             label="Facebook"
                                             icon={<Facebook variant="Linear" />}
                                         />
@@ -491,9 +663,18 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
 
                                     {site_settings?.social_links?.tiktok && (
                                         <SocialIcon
-                                            href={site_settings.social_links.tiktok}
+                                            href={
+                                                site_settings.social_links
+                                                    .tiktok
+                                            }
                                             label="TikTok"
-                                            icon={<Icon icon="ic:baseline-tiktok" width={20} height={20} />}
+                                            icon={
+                                                <Icon
+                                                    icon="ic:baseline-tiktok"
+                                                    width={20}
+                                                    height={20}
+                                                />
+                                            }
                                         />
                                     )}
                                 </div>
@@ -526,30 +707,55 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
                         {/* Header */}
                         <div className="text-center">
                             <div className="inline-flex items-center justify-center rounded-xl bg-primary/10 px-8 py-3">
-                                <span className="text-xs font-semibold tracking-[0.18em] text-primary">Contact Us</span>
+                                <span className="text-xs font-semibold tracking-[0.18em] text-primary">
+                                    Contact Us
+                                </span>
                             </div>
 
-                            <h2 className="mt-6 text-[32px] font-medium text-dark sm:text-[44px]">What Our Customers Say</h2>
+                            <h2 className="mt-6 text-[32px] font-medium text-dark sm:text-[44px]">
+                                What Our Customers Say
+                            </h2>
                         </div>
 
                         <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
                             {testimonials.map((testimonial) => (
-                                <div key={testimonial.id} className="relative rounded-2xl border border-gray-100 bg-gray-50 p-6 sm:p-8">
+                                <div
+                                    key={testimonial.id}
+                                    className="relative rounded-2xl border border-gray-100 bg-gray-50 p-6 sm:p-8"
+                                >
                                     <div className="mb-4 flex items-center gap-1 text-primary">
                                         {[...Array(5)].map((_, i) => (
-                                            <Star1 key={i} size={16} variant={i < testimonial.rating ? 'Bold' : 'Linear'} />
+                                            <Star1
+                                                key={i}
+                                                size={16}
+                                                variant={
+                                                    i < testimonial.rating
+                                                        ? 'Bold'
+                                                        : 'Linear'
+                                                }
+                                            />
                                         ))}
                                     </div>
-                                    <p className="mb-5 text-sm text-gray-600 italic sm:mb-6 sm:text-base">"{testimonial.content}"</p>
+                                    <p className="mb-5 text-sm text-gray-600 italic sm:mb-6 sm:text-base">
+                                        "{testimonial.content}"
+                                    </p>
                                     <div className="flex items-center gap-3 sm:gap-4">
                                         <img
-                                            src={testimonial.photo_path ? `/storage/${testimonial.photo_path}` : 'https://placehold.co/100'}
+                                            src={
+                                                testimonial.photo_path
+                                                    ? `/storage/${testimonial.photo_path}`
+                                                    : 'https://placehold.co/100'
+                                            }
                                             alt={testimonial.name}
                                             className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
                                         />
                                         <div>
-                                            <h4 className="text-sm font-bold text-dark sm:text-base">{testimonial.name}</h4>
-                                            <span className="text-xs text-gray-400">Customer</span>
+                                            <h4 className="text-sm font-bold text-dark sm:text-base">
+                                                {testimonial.name}
+                                            </h4>
+                                            <span className="text-xs text-gray-400">
+                                                Customer
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -562,12 +768,19 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
             {/* CTA Section */}
             <section className="relative overflow-hidden bg-dark py-16 text-white sm:py-20">
                 <div className="absolute inset-0 opacity-5">
-                    <img src="/images/svgs/map-world.svg" alt="" className="h-full w-full object-cover" />
+                    <img
+                        src="/images/svgs/map-world.svg"
+                        alt=""
+                        className="h-full w-full object-cover"
+                    />
                 </div>
                 <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-                    <h2 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-5xl">Ready to Explore Bali?</h2>
+                    <h2 className="mb-4 text-2xl font-bold sm:mb-6 sm:text-3xl md:text-5xl">
+                        Ready to Explore Bali?
+                    </h2>
                     <p className="mx-auto mb-6 max-w-2xl text-base text-gray-400 sm:mb-8 sm:text-xl">
-                        Don't let transportation hold you back. Book your scooter today and enjoy the freedom of the road.
+                        Don't let transportation hold you back. Book your
+                        scooter today and enjoy the freedom of the road.
                     </p>
                     <a
                         href={getWhatsAppLink()}
@@ -582,7 +795,12 @@ export default function Welcome({ scooters, testimonials, site_settings }: Props
 
             {/* Booking Modal */}
             {selectedScooter && (
-                <BookingModal scooter={selectedScooter} siteSettings={site_settings} isOpen={isModalOpen} onClose={closeBookingModal} />
+                <BookingModal
+                    scooter={selectedScooter}
+                    siteSettings={site_settings}
+                    isOpen={isModalOpen}
+                    onClose={closeBookingModal}
+                />
             )}
         </FrontendLayout>
     );

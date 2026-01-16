@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->boolean('is_popular')->default(false);
             $table->boolean('is_available')->default(true);
-            $table->decimal('rating', 2, 1)->default(4.8);
+            $table->decimal('rating', 2, 1)->default(5.0);
             $table->unsignedInteger('reviews_count')->default(0);
 
             $table->unsignedTinyInteger('seats')->default(2);

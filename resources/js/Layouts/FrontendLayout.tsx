@@ -8,7 +8,6 @@ import {
     Instagram,
     Location,
     Music,
-    Sms,
 } from 'iconsax-react';
 import { PropsWithChildren, useEffect, useState } from 'react';
 
@@ -273,18 +272,18 @@ export default function FrontendLayout({ children, settings }: Props) {
 
                         {/* Contact */}
                         <div>
-                            <h4 className="mb-4 text-sm font-semibold text-white">
+                            <h4 className="text-sm font-semibold text-white">
                                 Contact Us
                             </h4>
-                            <ul className="space-y-3 text-sm">
-                                <li className="flex items-start gap-3">
+                            <ul>
+                                <li>
                                     <Location
                                         size={18}
                                         className="mt-0.5 flex-shrink-0 text-primary"
                                     />
-                                    <span>Canggu, Bali, Indonesia</span>
+                                    <span>Prerenan, Bali, Indonesia</span>
                                 </li>
-                                <li className="flex items-center gap-3">
+                                <li>
                                     <Call
                                         size={18}
                                         className="flex-shrink-0 text-primary"
@@ -292,18 +291,9 @@ export default function FrontendLayout({ children, settings }: Props) {
                                     <span>
                                         {settings?.phone ||
                                             settings?.wa_number ||
-                                            '+62 812 3456 789'}
+                                            '+62 831 1958 4477'}
                                     </span>
                                 </li>
-                                {settings?.email && (
-                                    <li className="flex items-center gap-3">
-                                        <Sms
-                                            size={18}
-                                            className="flex-shrink-0 text-primary"
-                                        />
-                                        <span>{settings.email}</span>
-                                    </li>
-                                )}
                             </ul>
                         </div>
                     </div>

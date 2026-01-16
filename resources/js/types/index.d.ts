@@ -20,7 +20,7 @@ export interface Scooter {
     rating?: number;
     reviews_count?: number;
     seats: number;
-    transmission: 'matic' | 'manual';
+    transmission: 'Matic' | 'Manual';
     engine_cc?: number;
     fuel_type: 'Pertamax' | 'Pertalite';
     helmets_included: boolean;
