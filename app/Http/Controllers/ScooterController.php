@@ -58,7 +58,7 @@ class ScooterController extends Controller
 
         Scooter::create([
             'name' => $request->name,
-            'slug' => Str::slug($request->name).'-'.Str::random(6),
+            'slug' => Str::slug($request->name) . '-' . Str::random(6),
             'brand' => $request->brand,
             'price_per_day' => $request->price_per_day,
             'image_path' => $imagePath,
@@ -124,7 +124,7 @@ class ScooterController extends Controller
         ];
 
         if ($request->name !== $scooter->name) {
-            $data['slug'] = Str::slug($request->name).'-'.Str::random(6);
+            $data['slug'] = Str::slug($request->name) . '-' . Str::random(6);
         }
 
         if ($request->hasFile('image')) {
@@ -152,12 +152,9 @@ class ScooterController extends Controller
         return redirect()->route('scooters.index');
     }
 
-    use Illuminate\Support\Facades\Storage;
-    use Illuminate\Support\Str;
-
     private function publicUrl(?string $path): ?string
     {
-        if (! $path) {
+        if (!$path) {
             return null;
         }
         if (Str::startsWith($path, ['http://', 'https://'])) {
