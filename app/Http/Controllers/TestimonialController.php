@@ -6,6 +6,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class TestimonialController extends Controller
 {
@@ -14,7 +15,11 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        $testimonials = Testimonial::latest()->get();
+        $testimonials = Testimonial::latest()->get()->map(function ($item) {
+            $item->photo_url = $this->publicUrl($item->photo_path);
+            return $item;
+        });
+
         return Inertia::render('Admin/Testimonials/Index', [
             'testimonials' => $testimonials
         ]);
@@ -57,6 +62,8 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
+        $testimonial->photo_url = $this->publicUrl($testimonial->photo_path);
+
         return Inertia::render('Admin/Testimonials/Edit', [
             'testimonial' => $testimonial
         ]);
@@ -103,5 +110,23 @@ class TestimonialController extends Controller
         $testimonial->delete();
 
         return redirect()->route('testimonials.index');
+    }
+
+    /**
+     * Generate public URL for storage files.
+     */
+    private function publicUrl(?string $path): ?string
+    {
+        if (!$path) {
+            return null;
+        }
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+        if (Str::startsWith($path, 'storage/')) {
+            $path = Str::after($path, 'storage/');
+        }
+
+        return Storage::disk('public')->url($path);
     }
 }

@@ -34,6 +34,7 @@ export interface Testimonial {
     rating: number;
     content: string;
     photo_path: string;
+    photo_url?: string;
     created_at: string;
     updated_at: string;
 }

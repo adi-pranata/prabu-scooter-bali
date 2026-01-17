@@ -156,8 +156,8 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                         setData(
                                             'transmission',
                                             e.target.value as
-                                                | 'matic'
-                                                | 'manual',
+                                            | 'matic'
+                                            | 'manual',
                                         )
                                     }
                                     required
@@ -211,8 +211,8 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                         setData(
                                             'fuel_type',
                                             e.target.value as
-                                                | 'pertamax'
-                                                | 'pertalite',
+                                            | 'pertamax'
+                                            | 'pertalite',
                                         )
                                     }
                                     required
@@ -235,7 +235,7 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                 <div className="mt-1 flex items-center gap-4">
                                     {scooter.image_url && (
                                         <img
-                                            src={`/storage/${scooter.image_url}`}
+                                            src={scooter.image_url}
                                             alt="Current"
                                             className="h-12 w-12 rounded border border-gray-200 object-cover"
                                         />

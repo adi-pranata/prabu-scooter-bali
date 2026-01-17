@@ -80,9 +80,7 @@ class ScooterController extends Controller
      */
     public function edit(Scooter $scooter)
     {
-        $scooter->image_url = $scooter->image_path
-            ? Storage::disk('public')->url($scooter->image_path)
-            : null;
+        $scooter->image_url = $this->publicUrl($scooter->image_path);
 
         return Inertia::render('Admin/Scooters/Edit', [
             'scooter' => $scooter,

@@ -86,9 +86,8 @@ export default function Index({ scooters }: Props) {
                                                     <img
                                                         className="h-10 w-10 rounded-lg bg-gray-100 object-cover"
                                                         src={
-                                                            scooter.image_url
-                                                                ? `/storage/${scooter.image_url}`
-                                                                : 'https://placehold.co/100'
+                                                            scooter.image_url ??
+                                                            'https://placehold.co/100'
                                                         }
                                                         alt={scooter.name}
                                                     />

@@ -67,7 +67,7 @@ export default function Index({ testimonials }: Props) {
                                                 <div className="h-10 w-10 flex-shrink-0">
                                                     <img
                                                         className="h-10 w-10 rounded-full object-cover bg-gray-100"
-                                                        src={testimonial.photo_path ? `/storage/${testimonial.photo_path}` : 'https://placehold.co/100'}
+                                                        src={testimonial.photo_url ?? 'https://placehold.co/100'}
                                                         alt={testimonial.name}
                                                     />
                                                 </div>

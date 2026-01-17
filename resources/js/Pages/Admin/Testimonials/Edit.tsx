@@ -82,9 +82,9 @@ export default function Edit({ testimonial }: { testimonial: Testimonial }) {
                             <div>
                                 <InputLabel htmlFor="photo" value="Update Photo (Optional)" />
                                 <div className="mt-1 flex gap-4 items-center">
-                                    {testimonial.photo_path && (
+                                    {testimonial.photo_url && (
                                         <img
-                                            src={`/storage/${testimonial.photo_path}`}
+                                            src={testimonial.photo_url}
                                             alt="Current"
                                             className="h-12 w-12 rounded-full object-cover border border-gray-200"
                                         />

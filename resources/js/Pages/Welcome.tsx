@@ -730,9 +730,8 @@ export default function Welcome({
                                     <div className="flex items-center gap-3 sm:gap-4">
                                         <img
                                             src={
-                                                testimonial.photo_path
-                                                    ? `/storage/${testimonial.photo_path}`
-                                                    : 'https://placehold.co/100'
+                                                testimonial.photo_url ??
+                                                'https://placehold.co/100'
                                             }
                                             alt={testimonial.name}
                                             className="h-10 w-10 rounded-full object-cover sm:h-12 sm:w-12"
