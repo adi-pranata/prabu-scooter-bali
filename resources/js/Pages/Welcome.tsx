@@ -435,12 +435,14 @@ export default function Welcome({
                                 >
                                     <div className="px-5 pt-5 sm:px-6 sm:pt-6">
                                         {/* Image */}
-                                        <div className="flex h-[140px] items-center justify-center sm:h-[160px]">
+                                        <div className="flex h-[140px] items-center justify-center overflow-hidden sm:h-[160px]">
                                             <img
                                                 src={
                                                     scooter.image_url ??
                                                     '/images/placeholder-scooter.png'
                                                 }
+                                                alt={scooter.name}
+                                                className="max-h-full max-w-full object-contain"
                                             />
                                         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
+use App\Traits\HandlesImageUpload;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class TestimonialController extends Controller
 {
+    use HandlesImageUpload;
+
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +48,8 @@ class TestimonialController extends Controller
             'photo' => 'required|image|max:2048', // 2MB Max
         ]);
 
-        $photoPath = $request->file('photo')->store('testimonials', 'public');
+        // Process image with WebP conversion
+        $photoPath = $this->processImage($request->file('photo'), 'testimonials');
 
         Testimonial::create([
             'name' => $validated['name'],
@@ -88,10 +92,12 @@ class TestimonialController extends Controller
         ];
 
         if ($request->hasFile('photo')) {
-            if ($testimonial->photo_path) {
-                Storage::disk('public')->delete($testimonial->photo_path);
-            }
-            $data['photo_path'] = $request->file('photo')->store('testimonials', 'public');
+            // Process image with WebP conversion (also deletes old file)
+            $data['photo_path'] = $this->processImage(
+                $request->file('photo'),
+                'testimonials',
+                $testimonial->photo_path
+            );
         }
 
         $testimonial->update($data);

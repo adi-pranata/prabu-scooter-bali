@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Scooter;
+use App\Traits\HandlesImageUpload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -10,6 +11,8 @@ use Inertia\Inertia;
 
 class ScooterController extends Controller
 {
+    use HandlesImageUpload;
+
     /**
      * Display a listing of the resource.
      */
@@ -54,7 +57,8 @@ class ScooterController extends Controller
             'helmets_included' => 'boolean',
         ]);
 
-        $imagePath = $request->file('image')->store('scooters', 'public');
+        // Process image with WebP conversion
+        $imagePath = $this->processImage($request->file('image'), 'scooters');
 
         Scooter::create([
             'name' => $request->name,
@@ -126,10 +130,12 @@ class ScooterController extends Controller
         }
 
         if ($request->hasFile('image')) {
-            if ($scooter->image_path) {
-                Storage::disk('public')->delete($scooter->image_path);
-            }
-            $data['image_path'] = $request->file('image')->store('scooters', 'public');
+            // Process image with WebP conversion (also deletes old file)
+            $data['image_path'] = $this->processImage(
+                $request->file('image'),
+                'scooters',
+                $scooter->image_path
+            );
         }
 
         $scooter->update($data);
@@ -165,3 +171,4 @@ class ScooterController extends Controller
         return Storage::disk('public')->url($path);
     }
 }
+
