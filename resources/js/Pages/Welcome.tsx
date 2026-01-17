@@ -233,7 +233,7 @@ export default function Welcome({
                             </h3>
 
                             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
-                                Choose your and find <br /> your best car
+                                Choose your and find <br /> your best scooter
                             </p>
                         </div>
 
