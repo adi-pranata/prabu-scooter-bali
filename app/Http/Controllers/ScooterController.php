@@ -16,9 +16,7 @@ class ScooterController extends Controller
     public function index()
     {
         $scooters = Scooter::latest()->get()->map(function ($item) {
-            $item->image_url = $item->image_path
-                ? Storage::disk('public')->url($item->image_path)
-                : null;
+            $item->image_url = $this->publicUrl($item->image_path);
 
             return $item;
         });
@@ -152,5 +150,23 @@ class ScooterController extends Controller
         $scooter->delete();
 
         return redirect()->route('scooters.index');
+    }
+
+    use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
+
+    private function publicUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+        if (Str::startsWith($path, 'storage/')) {
+            $path = Str::after($path, 'storage/');
+        }
+
+        return Storage::disk('public')->url($path);
     }
 }

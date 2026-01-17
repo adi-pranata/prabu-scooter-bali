@@ -441,9 +441,6 @@ export default function Welcome({
                                                     scooter.image_url ??
                                                     '/images/placeholder-scooter.png'
                                                 }
-                                                alt={scooter.name}
-                                                className="max-h-[140px] w-auto object-contain sm:max-h-[160px]"
-                                                draggable={false}
                                             />
                                         </div>
 
