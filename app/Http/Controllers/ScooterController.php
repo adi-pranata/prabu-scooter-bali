@@ -10,36 +10,31 @@ use Inertia\Inertia;
 
 class ScooterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $scooters = Scooter::latest()->get();
+        $scooters = Scooter::latest()->get()->map(function ($s) {
+            $s->image_url = $this->publicUrl($s->image_path);
+
+            return $s;
+        });
 
         return Inertia::render('Admin/Scooters/Index', [
             'scooters' => $scooters,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('Admin/Scooters/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'brand' => 'required|string|max:255',
             'price_per_day' => 'required|numeric|min:0',
-            'image' => 'required|image|max:2048', // 2MB Max
+            'image' => 'required|image|max:2048',
             'description' => 'nullable|string',
             'is_available' => 'boolean',
             'is_popular' => 'boolean',
@@ -50,43 +45,40 @@ class ScooterController extends Controller
             'helmets_included' => 'boolean',
         ]);
 
+        // simpan hanya path relatif di disk public: "scooters/xxxx.jpg"
         $imagePath = $request->file('image')->store('scooters', 'public');
 
         Scooter::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name).'-'.Str::random(6),
-            'brand' => $request->brand,
-            'price_per_day' => $request->price_per_day,
+            'name' => $validated['name'],
+            'slug' => Str::slug($validated['name']).'-'.Str::random(6),
+            'brand' => $validated['brand'],
+            'price_per_day' => $validated['price_per_day'],
             'image_path' => $imagePath,
-            'description' => $request->description,
-            'is_available' => $request->is_available ?? true,
-            'is_popular' => $request->is_popular ?? false,
-            'seats' => $request->seats,
-            'transmission' => $request->transmission,
-            'engine_cc' => $request->engine_cc,
-            'fuel_type' => $request->fuel_type,
-            'helmets_included' => $request->helmets_included ?? true,
+            'description' => $validated['description'] ?? null,
+            'is_available' => $validated['is_available'] ?? true,
+            'is_popular' => $validated['is_popular'] ?? false,
+            'seats' => $validated['seats'],
+            'transmission' => $validated['transmission'],
+            'engine_cc' => $validated['engine_cc'] ?? null,
+            'fuel_type' => $validated['fuel_type'],
+            'helmets_included' => $validated['helmets_included'] ?? true,
         ]);
 
         return redirect()->route('scooters.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Scooter $scooter)
     {
+        $scooter->image_url = $this->publicUrl($scooter->image_path);
+
         return Inertia::render('Admin/Scooters/Edit', [
             'scooter' => $scooter,
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Scooter $scooter)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'brand' => 'required|string|max:255',
             'price_per_day' => 'required|numeric|min:0',
@@ -102,27 +94,29 @@ class ScooterController extends Controller
         ]);
 
         $data = [
-            'name' => $request->name,
-            'brand' => $request->brand,
-            'price_per_day' => $request->price_per_day,
-            'description' => $request->description,
-            'is_available' => $request->is_available,
-            'is_popular' => $request->is_popular,
-            'seats' => $request->seats,
-            'transmission' => $request->transmission,
-            'engine_cc' => $request->engine_cc,
-            'fuel_type' => $request->fuel_type,
-            'helmets_included' => $request->helmets_included,
+            'name' => $validated['name'],
+            'brand' => $validated['brand'],
+            'price_per_day' => $validated['price_per_day'],
+            'description' => $validated['description'] ?? null,
+            'is_available' => $validated['is_available'] ?? $scooter->is_available,
+            'is_popular' => $validated['is_popular'] ?? $scooter->is_popular,
+            'seats' => $validated['seats'],
+            'transmission' => $validated['transmission'],
+            'engine_cc' => $validated['engine_cc'] ?? null,
+            'fuel_type' => $validated['fuel_type'],
+            'helmets_included' => $validated['helmets_included'] ?? $scooter->helmets_included,
         ];
 
-        if ($request->name !== $scooter->name) {
-            $data['slug'] = Str::slug($request->name).'-'.Str::random(6);
+        if ($validated['name'] !== $scooter->name) {
+            $data['slug'] = Str::slug($validated['name']).'-'.Str::random(6);
         }
 
         if ($request->hasFile('image')) {
-            if ($scooter->image_path) {
+            // hapus file lama (kalau ada)
+            if ($scooter->image_path && Storage::disk('public')->exists($scooter->image_path)) {
                 Storage::disk('public')->delete($scooter->image_path);
             }
+
             $data['image_path'] = $request->file('image')->store('scooters', 'public');
         }
 
@@ -131,16 +125,27 @@ class ScooterController extends Controller
         return redirect()->route('scooters.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Scooter $scooter)
     {
-        if ($scooter->image_path) {
+        if ($scooter->image_path && Storage::disk('public')->exists($scooter->image_path)) {
             Storage::disk('public')->delete($scooter->image_path);
         }
+
         $scooter->delete();
 
         return redirect()->route('scooters.index');
+    }
+
+    private function publicUrl(?string $path): ?string
+    {
+        if (! $path) {
+            return null;
+        }
+        if (Str::startsWith($path, ['http://', 'https://'])) {
+            return $path;
+        }
+        $path = Str::startsWith($path, 'storage/') ? Str::after($path, 'storage/') : $path;
+
+        return Storage::disk('public')->url($path);
     }
 }

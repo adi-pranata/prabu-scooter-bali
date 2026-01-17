@@ -57,12 +57,9 @@ export default function BookingModal({
     const totalPrice = days * scooter.price_per_day;
 
     const imgSrc = useMemo(() => {
-        if (!scooter.image_path)
-            return 'https://placehold.co/1000x600?text=Scooter';
-        if (scooter.image_path.startsWith('http')) return scooter.image_path;
-        if (scooter.image_path.startsWith('storage/'))
-            return `/${scooter.image_path}`;
-        return `/storage/${scooter.image_path}`;
+        return (
+            scooter.image_path ?? 'https://placehold.co/1000x600?text=Scooter'
+        );
     }, [scooter.image_path]);
 
     const handleInputChange = (

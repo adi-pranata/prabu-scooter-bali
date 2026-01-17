@@ -253,7 +253,7 @@ export default function Welcome({
 
                             <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-gray-500">
                                 Select your pick up date and <br /> time to book
-                                your car
+                                your scooter
                             </p>
                         </div>
 
@@ -438,17 +438,8 @@ export default function Welcome({
                                         <div className="flex h-[140px] items-center justify-center sm:h-[160px]">
                                             <img
                                                 src={
-                                                    scooter.image_path
-                                                        ? scooter.image_path.startsWith(
-                                                              'http',
-                                                          )
-                                                            ? scooter.image_path
-                                                            : scooter.image_path.startsWith(
-                                                                    'storage/',
-                                                                )
-                                                              ? `/${scooter.image_path}`
-                                                              : `/storage/${scooter.image_path}`
-                                                        : '/images/placeholder-scooter.png'
+                                                    scooter.image_path ??
+                                                    '/images/placeholder-scooter.png'
                                                 }
                                                 alt={scooter.name}
                                                 className="max-h-[140px] w-auto object-contain sm:max-h-[160px]"
