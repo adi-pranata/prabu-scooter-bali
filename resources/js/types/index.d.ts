@@ -13,7 +13,7 @@ export interface Scooter {
     slug: string;
     brand: string;
     price_per_day: number;
-    image_path: string;
+    image_url: string;
     description?: string;
     is_popular: boolean;
     is_available: boolean;

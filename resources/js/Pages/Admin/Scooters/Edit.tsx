@@ -22,8 +22,13 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
         seats: scooter.seats || 2,
         transmission: (scooter.transmission || 'matic') as 'matic' | 'manual',
         engine_cc: scooter.engine_cc || ('' as number | ''),
-        fuel_type: (scooter.fuel_type || 'pertalite') as 'pertalite' | 'pertamax',
-        helmets_included: scooter.helmets_included !== undefined ? Boolean(scooter.helmets_included) : true,
+        fuel_type: (scooter.fuel_type || 'pertalite') as
+            | 'pertalite'
+            | 'pertamax',
+        helmets_included:
+            scooter.helmets_included !== undefined
+                ? Boolean(scooter.helmets_included)
+                : true,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -42,7 +47,9 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                     >
                         <ChevronLeft className="h-5 w-5" />
                     </Link>
-                    <h2 className="text-xl leading-tight font-semibold text-gray-800 dark:text-gray-200">Edit Scooter: {scooter.name}</h2>
+                    <h2 className="text-xl leading-tight font-semibold text-gray-800 dark:text-gray-200">
+                        Edit Scooter: {scooter.name}
+                    </h2>
                 </div>
             }
         >
@@ -60,11 +67,16 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                     type="text"
                                     className="mt-1 block w-full"
                                     value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('name', e.target.value)
+                                    }
                                     required
                                     isFocused
                                 />
-                                <InputError message={errors.name} className="mt-2" />
+                                <InputError
+                                    message={errors.name}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Brand */}
@@ -75,24 +87,37 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                     type="text"
                                     className="mt-1 block w-full"
                                     value={data.brand}
-                                    onChange={(e) => setData('brand', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('brand', e.target.value)
+                                    }
                                     required
                                 />
-                                <InputError message={errors.brand} className="mt-2" />
+                                <InputError
+                                    message={errors.brand}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Price */}
                             <div>
-                                <InputLabel htmlFor="price" value="Daily Price (IDR)" />
+                                <InputLabel
+                                    htmlFor="price"
+                                    value="Daily Price (IDR)"
+                                />
                                 <TextInput
                                     id="price"
                                     type="number"
                                     className="mt-1 block w-full"
                                     value={data.price_per_day}
-                                    onChange={(e) => setData('price_per_day', e.target.value)}
+                                    onChange={(e) =>
+                                        setData('price_per_day', e.target.value)
+                                    }
                                     required
                                 />
-                                <InputError message={errors.price_per_day} className="mt-2" />
+                                <InputError
+                                    message={errors.price_per_day}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Seats */}
@@ -103,64 +128,114 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                     type="number"
                                     className="mt-1 block w-full"
                                     value={data.seats}
-                                    onChange={(e) => setData('seats', parseInt(e.target.value))}
+                                    onChange={(e) =>
+                                        setData(
+                                            'seats',
+                                            parseInt(e.target.value),
+                                        )
+                                    }
                                     required
                                 />
-                                <InputError message={errors.seats} className="mt-2" />
+                                <InputError
+                                    message={errors.seats}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Transmission */}
                             <div>
-                                <InputLabel htmlFor="transmission" value="Transmission" />
+                                <InputLabel
+                                    htmlFor="transmission"
+                                    value="Transmission"
+                                />
                                 <select
                                     id="transmission"
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-orange-600 dark:focus:ring-orange-600"
                                     value={data.transmission}
-                                    onChange={(e) => setData('transmission', e.target.value as 'matic' | 'manual')}
+                                    onChange={(e) =>
+                                        setData(
+                                            'transmission',
+                                            e.target.value as
+                                                | 'matic'
+                                                | 'manual',
+                                        )
+                                    }
                                     required
                                 >
                                     <option value="matic">Matic</option>
                                     <option value="manual">Manual</option>
                                 </select>
-                                <InputError message={errors.transmission} className="mt-2" />
+                                <InputError
+                                    message={errors.transmission}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Engine CC */}
                             <div>
-                                <InputLabel htmlFor="engine_cc" value="Engine CC (Optional)" />
+                                <InputLabel
+                                    htmlFor="engine_cc"
+                                    value="Engine CC (Optional)"
+                                />
                                 <TextInput
                                     id="engine_cc"
                                     type="number"
                                     className="mt-1 block w-full"
                                     value={data.engine_cc}
-                                    onChange={(e) => setData('engine_cc', e.target.value ? parseInt(e.target.value) : '')}
+                                    onChange={(e) =>
+                                        setData(
+                                            'engine_cc',
+                                            e.target.value
+                                                ? parseInt(e.target.value)
+                                                : '',
+                                        )
+                                    }
                                 />
-                                <InputError message={errors.engine_cc} className="mt-2" />
+                                <InputError
+                                    message={errors.engine_cc}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Fuel Type */}
                             <div>
-                                <InputLabel htmlFor="fuel_type" value="Fuel Type" />
+                                <InputLabel
+                                    htmlFor="fuel_type"
+                                    value="Fuel Type"
+                                />
                                 <select
                                     id="fuel_type"
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-orange-600 dark:focus:ring-orange-600"
                                     value={data.fuel_type}
-                                    onChange={(e) => setData('fuel_type', e.target.value as 'pertamax' | 'pertalite')}
+                                    onChange={(e) =>
+                                        setData(
+                                            'fuel_type',
+                                            e.target.value as
+                                                | 'pertamax'
+                                                | 'pertalite',
+                                        )
+                                    }
                                     required
                                 >
                                     <option value="pertalite">Pertalite</option>
                                     <option value="pertamax">Pertamax</option>
                                 </select>
-                                <InputError message={errors.fuel_type} className="mt-2" />
+                                <InputError
+                                    message={errors.fuel_type}
+                                    className="mt-2"
+                                />
                             </div>
 
                             {/* Image */}
                             <div>
-                                <InputLabel htmlFor="image" value="Update Image (Optional)" />
+                                <InputLabel
+                                    htmlFor="image"
+                                    value="Update Image (Optional)"
+                                />
                                 <div className="mt-1 flex items-center gap-4">
-                                    {scooter.image_path && (
+                                    {scooter.image_url && (
                                         <img
-                                            src={`/storage/${scooter.image_path}`}
+                                            src={`/storage/${scooter.image_url}`}
                                             alt="Current"
                                             className="h-12 w-12 rounded border border-gray-200 object-cover"
                                         />
@@ -170,24 +245,42 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                         type="file"
                                         accept="image/*"
                                         className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
-                                        onChange={(e) => setData('image', e.target.files ? e.target.files[0] : null)}
+                                        onChange={(e) =>
+                                            setData(
+                                                'image',
+                                                e.target.files
+                                                    ? e.target.files[0]
+                                                    : null,
+                                            )
+                                        }
                                     />
                                 </div>
-                                <InputError message={errors.image} className="mt-2" />
+                                <InputError
+                                    message={errors.image}
+                                    className="mt-2"
+                                />
                             </div>
                         </div>
 
                         {/* Description */}
                         <div>
-                            <InputLabel htmlFor="description" value="Description / Features" />
+                            <InputLabel
+                                htmlFor="description"
+                                value="Description / Features"
+                            />
                             <textarea
                                 id="description"
                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-orange-600 dark:focus:ring-orange-600"
                                 rows={3}
                                 value={data.description}
-                                onChange={(e) => setData('description', e.target.value)}
+                                onChange={(e) =>
+                                    setData('description', e.target.value)
+                                }
                             />
-                            <InputError message={errors.description} className="mt-2" />
+                            <InputError
+                                message={errors.description}
+                                className="mt-2"
+                            />
                         </div>
 
                         {/* Toggles */}
@@ -196,23 +289,45 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                 <Checkbox
                                     name="is_available"
                                     checked={data.is_available}
-                                    onChange={(e) => setData('is_available', e.target.checked)}
+                                    onChange={(e) =>
+                                        setData(
+                                            'is_available',
+                                            e.target.checked,
+                                        )
+                                    }
                                 />
-                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Available for Rent</span>
+                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Available for Rent
+                                </span>
                             </label>
 
                             <label className="flex items-center">
-                                <Checkbox name="is_popular" checked={data.is_popular} onChange={(e) => setData('is_popular', e.target.checked)} />
-                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Mark as Popular</span>
+                                <Checkbox
+                                    name="is_popular"
+                                    checked={data.is_popular}
+                                    onChange={(e) =>
+                                        setData('is_popular', e.target.checked)
+                                    }
+                                />
+                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Mark as Popular
+                                </span>
                             </label>
 
                             <label className="flex items-center">
                                 <Checkbox
                                     name="helmets_included"
                                     checked={data.helmets_included}
-                                    onChange={(e) => setData('helmets_included', e.target.checked)}
+                                    onChange={(e) =>
+                                        setData(
+                                            'helmets_included',
+                                            e.target.checked,
+                                        )
+                                    }
                                 />
-                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">Helmets Included</span>
+                                <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+                                    Helmets Included
+                                </span>
                             </label>
                         </div>
 
@@ -224,7 +339,10 @@ export default function Edit({ scooter }: { scooter: Scooter }) {
                                 Cancel
                             </Link>
 
-                            <PrimaryButton className="bg-orange-600 hover:bg-orange-500" disabled={processing}>
+                            <PrimaryButton
+                                className="bg-orange-600 hover:bg-orange-500"
+                                disabled={processing}
+                            >
                                 {processing ? 'Saving...' : 'Save Changes'}
                             </PrimaryButton>
                         </div>

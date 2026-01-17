@@ -438,7 +438,7 @@ export default function Welcome({
                                         <div className="flex h-[140px] items-center justify-center sm:h-[160px]">
                                             <img
                                                 src={
-                                                    scooter.image_path ??
+                                                    scooter.image_url ??
                                                     '/images/placeholder-scooter.png'
                                                 }
                                                 alt={scooter.name}

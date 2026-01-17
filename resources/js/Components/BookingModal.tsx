@@ -58,9 +58,9 @@ export default function BookingModal({
 
     const imgSrc = useMemo(() => {
         return (
-            scooter.image_path ?? 'https://placehold.co/1000x600?text=Scooter'
+            scooter.image_url ?? 'https://placehold.co/1000x600?text=Scooter'
         );
-    }, [scooter.image_path]);
+    }, [scooter.image_url]);
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
