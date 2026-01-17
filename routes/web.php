@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\PublicStorageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+Route::get('/storage/{path}', [PublicStorageController::class, 'show'])
+    ->where('path', '.*');
 
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index'])->name('home');
 Route::get('/sitemap.xml', [\App\Http\Controllers\SitemapController::class, 'index']);
@@ -24,4 +27,4 @@ Route::middleware('auth')->group(function () {
     Route::patch('/settings', [\App\Http\Controllers\SiteSettingController::class, 'update'])->name('settings.update');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
